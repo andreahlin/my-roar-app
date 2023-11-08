@@ -19,6 +19,10 @@ const notHotDogFiles = Array.from(Array(numFiles), (_, i) => i + 1).map(
   (idx) => `https://storage.googleapis.com/roar-hot-dog-images/nothotdog/${idx}.jpg`,
 );
 
+const dogFiles = Array.from(Array(numFiles), (_, i) => i + 1).map(
+  (idx) => `https://storage.googleapis.com/roar-hot-dog-images/dog/${idx}.jpg`,
+);
+
 const allFiles = hotDogFiles.concat(notHotDogFiles);
 export const allTargets = allFiles.map((url) => ({
   target: `<img src="${url}" width=250 height=250>`,
@@ -31,8 +35,14 @@ export const preloadImages = {
   images: allFiles,
 };
 
-// Preload the cat image
-export const preloadCatImages = {
+const block2Files = catImages.concat(dogFiles);
+export const block2Targets = block2Files.map((url) => ({
+  target: `<img src="${url}" width=250 height=250>`,
+  isDog: url.includes('dog'),
+}));
+
+// Preload the cat/dog images
+export const preloadBlock2Images = {
   type: jsPsychPreload,
-  images: catImages,
-}
+  images: block2Files,
+};
